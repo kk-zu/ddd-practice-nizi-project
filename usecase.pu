@@ -1,0 +1,11 @@
+@startuml NiziProject
+actor プロデューサー
+left to right direction
+rectangle {
+    プロデューサー -- (キューブをあげる)
+    プロデューサー -- (テストを進める)
+    プロデューサー -- (パート1脱落者を決める)
+    プロデューサー -- (パート2脱落者を決める)
+    プロデューサー -- (合格者を決める)
+}
+@endumlzu
