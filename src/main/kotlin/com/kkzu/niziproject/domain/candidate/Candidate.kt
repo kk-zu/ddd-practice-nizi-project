@@ -4,12 +4,16 @@ import java.util.*
 
 class Candidate {
 
-    var candidateId: String
+    val candidateId: String
     val name: CandidateName
     var dropedoutPart1: Boolean
+        private set
     var dropedoutPart2: Boolean
+        private set
     var passed: Boolean
+        private set
     var pendant: Pendant
+        private set
 //    TODO: オーディション実装後に実装する
 //    val auditionId: String
 
@@ -43,6 +47,20 @@ class Candidate {
                 this.pendant.part1cubes,
                 this.pendant.part2cubes.plus(cube)
         )
+    }
+
+    /**
+     * パート１脱落
+     */
+    fun dropoutPart1() {
+        this.dropedoutPart1 = true
+    }
+
+    /**
+     * パート２脱落
+     */
+    fun dropoutPart2() {
+        this.dropedoutPart2 = true
     }
 
 }
