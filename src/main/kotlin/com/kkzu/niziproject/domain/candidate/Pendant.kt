@@ -9,6 +9,11 @@ class Pendant {
 
     private val ACCEPT_PART1CUBES = listOf(DANCE, SING, STAR_QUALITY, PERSONALITY)
 
+    constructor() {
+        part1cubes = listOf()
+        part2cubes = listOf()
+    }
+
     constructor(part1cubes: List<Cube>, part2cubes: List<Cube>) {
         if (part1cubes.size > 4) throw IllegalArgumentException()
         if (part1cubes.distinct().size != part1cubes.size
