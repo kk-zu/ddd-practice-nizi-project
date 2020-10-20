@@ -3,6 +3,7 @@ package com.kkzu.niziproject.candidate
 import io.kotlintest.specs.StringSpec
 import com.kkzu.niziproject.domain.candidate.Cube.*
 import com.kkzu.niziproject.domain.candidate.Pendant
+import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotThrow
 import io.kotlintest.shouldThrow
 
@@ -49,6 +50,12 @@ class PendantSpec: StringSpec() {
             shouldNotThrow<IllegalArgumentException> {
                 Pendant(listOf(), listOf())
             }
+        }
+
+        "Pendant constructor make init Instance" {
+            val pendant = Pendant()
+            pendant.part1cubes.size shouldBe 0
+            pendant.part2cubes.size shouldBe 0
         }
     }
 
