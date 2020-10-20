@@ -1,5 +1,6 @@
 package com.kkzu.niziproject.domain.candidate
 
+import com.kkzu.niziproject.domain.DomainException
 import java.util.*
 
 class Candidate {
@@ -31,6 +32,10 @@ class Candidate {
      * @param cube パート１キューブ
      */
     fun acquireCubeByPart1(cube: Cube) {
+        if (this.dropedoutPart1 || this.dropedoutPart2)
+            throw DomainException("すでに脱落した候補者です。")
+        if (this.passed)
+            throw DomainException("合格済の候補者です。")
         this.pendant = Pendant(
                 this.pendant.part1cubes.plus(cube),
                 this.pendant.part2cubes
@@ -42,7 +47,10 @@ class Candidate {
      * @param cube パート２キューブ
      */
     fun acquireCubeByPart2(cube: Cube) {
-        if (this.dropedoutPart1 || this.dropedoutPart2) throw IllegalArgumentException()
+        if (this.dropedoutPart1 || this.dropedoutPart2)
+            throw DomainException("すでに脱落した候補者です。")
+        if (this.passed)
+            throw DomainException("合格済の候補者です。")
         this.pendant = Pendant(
                 this.pendant.part1cubes,
                 this.pendant.part2cubes.plus(cube)
@@ -53,6 +61,10 @@ class Candidate {
      * パート１脱落
      */
     fun dropoutPart1() {
+        if (this.dropedoutPart1 || this.dropedoutPart2)
+            throw DomainException("すでに脱落した候補者です。")
+        if (this.passed)
+            throw DomainException("合格済の候補者です。")
         this.dropedoutPart1 = true
     }
 
@@ -60,7 +72,22 @@ class Candidate {
      * パート２脱落
      */
     fun dropoutPart2() {
+        if (this.dropedoutPart1 || this.dropedoutPart2)
+            throw DomainException("すでに脱落した候補者です。")
+        if (this.passed)
+            throw DomainException("合格済の候補者です。")
         this.dropedoutPart2 = true
+    }
+
+    /**
+     * オーディションに合格
+     */
+    fun pass() {
+        if (this.dropedoutPart1 || this.dropedoutPart2)
+            throw DomainException("すでに脱落した候補者です。")
+        if (this.passed)
+            throw DomainException("合格済の候補者です。")
+        this.passed = true
     }
 
 }

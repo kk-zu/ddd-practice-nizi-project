@@ -1,5 +1,6 @@
 package com.kkzu.niziproject.candidate
 
+import com.kkzu.niziproject.domain.DomainException
 import io.kotlintest.specs.StringSpec
 import com.kkzu.niziproject.domain.candidate.Cube.*
 import com.kkzu.niziproject.domain.candidate.Pendant
@@ -11,43 +12,48 @@ class PendantSpec: StringSpec() {
 
     init {
         "Pendant constructor throw error given 5 part1cubes" {
-            shouldThrow<IllegalArgumentException> {
+            val error = shouldThrow<DomainException> {
                 Pendant(listOf(DANCE,SING,STAR_QUALITY,PERSONALITY,PART2CUBE), listOf(PART2CUBE))
             }
+            error.message shouldBe "パート１キューブが４つ以上含まれています。"
         }
 
         "Pendant constructor throw error given duplicate part1cubes" {
-            shouldThrow<IllegalArgumentException> {
+            val error = shouldThrow<DomainException> {
                 Pendant(listOf(DANCE,DANCE), listOf(PART2CUBE))
             }
+            error.message shouldBe "重複したパート１キューブが含まれています。"
         }
 
         "Pendant constructor throw error given part2cube in part1cubes" {
-            shouldThrow<IllegalArgumentException> {
+            val error = shouldThrow<DomainException> {
                 Pendant(listOf(PART2CUBE), listOf(PART2CUBE))
             }
+            error.message shouldBe "パート１キューブ以外のキューブが含まれています。"
         }
 
         "Pendant constructor throw error given 5 part2cubes" {
-            shouldThrow<IllegalArgumentException> {
+            val error = shouldThrow<DomainException> {
                 Pendant(listOf(DANCE), listOf(PART2CUBE,PART2CUBE,PART2CUBE,PART2CUBE,PART2CUBE))
             }
+            error.message shouldBe "パート２キューブが４つ以上含まれています。"
         }
 
         "Pendant constructor throw error given part1cube in part2cubes" {
-            shouldThrow<IllegalArgumentException> {
+            val error = shouldThrow<DomainException> {
                 Pendant(listOf(DANCE), listOf(DANCE))
             }
+            error.message shouldBe "パート２キューブ以外のキューブが含まれています。"
         }
 
         "Pendant constructor make Instance by max 4 cubes and no duplicated" {
-            shouldNotThrow<IllegalArgumentException> {
+            shouldNotThrow<DomainException> {
                 Pendant(listOf(DANCE,SING,STAR_QUALITY,PERSONALITY), listOf(PART2CUBE,PART2CUBE,PART2CUBE,PART2CUBE))
             }
         }
 
         "Pendant constructor make Instance by empty list" {
-            shouldNotThrow<IllegalArgumentException> {
+            shouldNotThrow<DomainException> {
                 Pendant(listOf(), listOf())
             }
         }
