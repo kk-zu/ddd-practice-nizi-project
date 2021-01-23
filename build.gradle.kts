@@ -7,7 +7,7 @@ plugins {
 	kotlin("plugin.spring") version "1.3.72"
 }
 
-group = "com.example"
+group = "com.kkzu"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
@@ -23,6 +23,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
 }
 
 tasks.withType<Test> {

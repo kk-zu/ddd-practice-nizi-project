@@ -1,4 +1,4 @@
-package com.example.dddpracticenizi
+package com.kkzu.niziproject
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

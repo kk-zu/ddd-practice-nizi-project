@@ -1,4 +1,4 @@
-package com.example.dddpracticenizi
+package com.kkzu.niziproject
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
